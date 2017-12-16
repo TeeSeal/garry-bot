@@ -14,6 +14,21 @@ class Response {
         return this;
     }
 
+    addFile(file) {
+        this.messages.push({
+            type: 4,
+            payload: {
+                facebook: {
+                    attachment: {
+                        type: 'file',
+                        payload: { url: file },
+                    },
+                },
+            },
+        });
+        return this;
+    }
+
     send() {
         return this.res.send({ messages: this.messages });
     }

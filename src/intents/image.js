@@ -10,6 +10,7 @@ class ImageIntent extends Intent {
             .addImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Bucephala-albeola-010.jpg/1200px-Bucephala-albeola-010.jpg')
             .addMessage('Hello')
             .addMessage('There')
+            .addFile('http://www.pdf995.com/samples/pdf.pdf')
             .send();
     }
 }
