@@ -5,16 +5,16 @@ class BalanceIntent extends Intent {
         super(handler, 'balance');
     }
 
-    exec(data, respond) {
+    exec(data, res) {
         const accountName = data.params.account;
         const account = accountName ? this.client.bank.accounts.find('name', accountName) : null;
 
         if (account) {
-            return respond(`The balance of your ${account.name} account is ${account.balance} ${account.currencyCode}`);
+            return res.addMessage(`The balance of your ${account.name} account is ${account.balance} ${account.currencyCode}`).send();
         }
 
         const balances = this.client.bank.accounts.map(acc => `${acc.name}: ${acc.balance} ${acc.currencyCode}`);
-        respond(`Here are your account balances:\n${balances.join('\n')}`);
+        res.addMessage(`Here are your account balances:\n${balances.join('\n')}`).send();
     }
 }
 

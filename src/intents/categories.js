@@ -6,11 +6,10 @@ class CategoriesIntent extends Intent {
         super(handler, 'categories');
     }
 
-    exec(data, respond) {
-        console.log(data);
+    exec(data, res) {
         const categories = this.client.bank.transactions.map(t => t.category);
         const response = uniq(categories).join(', ');
-        return respond(response);
+        return res.addMessage(response).send();
     }
 }
 

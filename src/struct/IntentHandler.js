@@ -1,4 +1,5 @@
 const Collection = require('./Collection');
+const Response = require('./Response.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -27,7 +28,7 @@ class IntentHandler {
         if (!intent) return null;
 
         const data = this.parse(req.body.result);
-        return intent.exec(data, speech => res.send({ speech }));
+        return intent.exec(data, new Response(res));
     }
 
     parse(result) {

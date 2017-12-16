@@ -5,11 +5,11 @@ class AccountInfoIntent extends Intent {
         super(handler, 'account_info');
     }
 
-    exec(data, respond) {
+    exec(data, res) {
         const accountName = data.params.account;
-        if (!accountName) return respond('What account do you want information on?');
+        if (!accountName) return res.addMessage('What account do you want information on?').send();
         const account = this.client.bank.accounts.find('name', accountName);
-        if (!account) return respond('Sorry, couldn\'t find such an account.');
+        if (!account) return res.addMessage('Sorry, couldn\'t find such an account.').send();
 
         const response = [
             `Number: ${account.id}`,
@@ -21,7 +21,7 @@ class AccountInfoIntent extends Intent {
         if (account.blockedAmount) response.push(`Blocked Amount: ${account.availableAmount} ${account.currencyCode}`);
         response.push(`Transactions: ${account.transactions.size}`);
 
-        respond(response.join('\n'));
+        res.addMessage(response.join('\n')).send();
     }
 }
 

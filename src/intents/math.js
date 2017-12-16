@@ -5,18 +5,18 @@ class MathIntent extends Intent {
         super(handler, 'math');
     }
 
-    exec(data, respond) {
+    exec(data, res) {
         const eq = data.params.equation;
-        if (!eq) return respond('What are you trying to calculate?');
+        if (!eq) return res.addMessage('What are you trying to calculate?').send();
 
         let result;
         try {
-            result = eval(eq);
+            result = eval(eq).toString();
         } catch (err) {
             result = 'Sorry, that is not a valid equation.';
         }
 
-        return respond(result);
+        return res.addMessage(result).send();
     }
 }
 
