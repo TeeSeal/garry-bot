@@ -9,6 +9,22 @@ class Response {
         return this;
     }
 
+    addCard(opts) {
+        this.messages.push({
+            type: 1,
+            imageUrl: opts.imageUrl,
+            buttons: opts.buttons,
+            title: opts.title,
+            subtitle: opts.subtitle,
+        });
+        return this;
+    }
+
+    addQuickReply(replies, title) {
+        this.messages.push({ type: 2, replies, title });
+        return this;
+    }
+
     addImage(imageUrl) {
         this.messages.push({ type: 3, imageUrl });
         return this;

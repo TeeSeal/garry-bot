@@ -7,10 +7,17 @@ class ImageIntent extends Intent {
 
     exec(data, res) {
         return res
-            .addImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Bucephala-albeola-010.jpg/1200px-Bucephala-albeola-010.jpg')
-            .addMessage('Hello')
-            .addMessage('There')
-            .addFile('http://www.pdf995.com/samples/pdf.pdf')
+            .addCard({
+                imageUrl: 'http://i0.kym-cdn.com/photos/images/original/001/248/525/3e4.jpg',
+                title: 'BananaDuck',
+                subtitle: 'Just look at it!',
+                buttons: [
+                    {
+                        postback: 'https://youtu.be/',
+                        text: 'Go To Youtube',
+                    },
+                ],
+            })
             .send();
     }
 }
