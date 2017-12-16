@@ -1,0 +1,5 @@
+{
+    "databasePath": "./src/db/sequelize.database",
+    "intentsPath": "./src/intents/",
+    "port": 3000
+}

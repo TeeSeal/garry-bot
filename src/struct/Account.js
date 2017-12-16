@@ -1,19 +1,23 @@
 class Account {
-    constructor(opts) {
+    constructor(bank, opts) {
+        this.bank = bank;
+        this.id = opts.id;
         this.name = opts.name;
-        this.currencyCode = opts.currency_code;
+        this.currencyCode = opts.currencyCode;
         this.balance = opts.balance;
-
-        this.extra = {
-            availableAmount: opts.extra.available_amount,
-            blockedAmount: opts.extra.blocked_amount,
-        };
-
-        this.transactions = null;
+        this.availableAmount = opts.extra ? opts.extra.availableAmount : opts.availableAmount;
+        this.blockedAmount = opts.extra ? opts.extra.blockedAmount : opts.blockedAmount;
     }
 
-    setTransactions(transactions) {
-        this.transactions = transactions;
+    toJSON() {
+        return {
+            id: this.id,
+            name: this.name,
+            currencyCode: this.currencyCode,
+            balance: this.balance,
+            availableAmount: this.availableAmount,
+            blockedAmount: this.blockedAmount,
+        };
     }
 }
 

@@ -4,7 +4,8 @@
   "description": "FinTech chat bot",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "sync": "node ./src/util/sync.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,9 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "moment": "^2.19.4"
+    "moment": "^2.19.4",
+    "sequelize": "^4.28.5",
+    "sqlite3": "^3.1.13"
   },
   "engines": {
     "node": "9.2.0"

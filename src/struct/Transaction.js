@@ -1,16 +1,30 @@
 const moment = require('moment');
 
 class Transaction {
-    constructor(account, opts) {
-        this.checksum = opts.checksum;
-        this.account = account;
+    constructor(bank, accountID, opts) {
+        this.bank = bank;
+        this.id = opts.id;
+        this.accountID = accountID;
 
-        this.madeOn = moment(opts.made_on);
+        this.madeOn = moment(opts.madeOn);
         this.amount = opts.amount;
-        this.currencyCode = opts.currency_code;
+        this.currencyCode = opts.currencyCode;
         this.description = opts.description;
         this.mode = opts.mode;
-        this.categroy = opts.extra.original_category;
+        this.category = opts.extra ? opts.extra.originalCategory : opts.originalCategory;
+    }
+
+    toJSON() {
+        return {
+            id: this.id,
+            accountID: this.accountID,
+            madeOn: this.madeOn.format().split('T')[0],
+            amount: this.amount,
+            currencyCode: this.currencyCode,
+            description: this.description,
+            mode: this.mode,
+            category: this.category,
+        };
     }
 }
 
