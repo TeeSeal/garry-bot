@@ -3,7 +3,7 @@
         "accounts": [
             {
                 "id": "502856513737",
-                "name": "account1",
+                "name": "Credit MDL",
                 "currencyCode": "MDL",
                 "balance": -2436.16,
                 "extra": {
@@ -2826,7 +2826,7 @@
             },
             {
                 "id": "568047857680",
-                "name": "account2",
+                "name": "Credit USD",
                 "currencyCode": "USD",
                 "balance": 35.61,
                 "extra": {

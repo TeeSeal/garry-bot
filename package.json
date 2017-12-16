@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "sync": "node ./src/util/sync.js"
+    "sync": "node ./src/scripts/sync.js"
   },
   "repository": {
     "type": "git",
