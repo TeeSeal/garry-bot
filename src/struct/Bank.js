@@ -13,11 +13,12 @@ class Bank {
 
     init() {
         for (const acc of this.db.accounts.items.values()) {
-            if (!acc.id) acc.id = this.generateAccountID;
+            if (!acc.id) acc.id = this.generateAccountID();
             const account = new Account(this, acc);
             this.accounts.set(account.id, account);
 
-            for (const tr of this.db.transactions.items.values()) {
+            const transactions = this.db.transactions.items.filter(t => t.accountID === account.id);
+            for (const tr of transactions.values()) {
                 if (!tr.id) tr.id = this.generateTransactionID();
                 const transaction = new Transaction(this, account.id, tr);
                 this.transactions.set(transaction.id, transaction);
@@ -29,7 +30,7 @@ class Bank {
 
     initJSON() {
         for (const acc of data.data.accounts) {
-            if (!acc.id) acc.id = this.generateAccountID;
+            if (!acc.id) acc.id = this.generateAccountID();
             const account = new Account(this, acc);
             this.accounts.set(account.id, account);
 
