@@ -9,6 +9,10 @@ class Account {
         this.blockedAmount = opts.extra ? opts.extra.blockedAmount : opts.blockedAmount;
     }
 
+    get transactions() {
+        return this.bank.transactions.filter(t => t.accountID === this.id);
+    }
+
     toJSON() {
         return {
             id: this.id,

@@ -2,11 +2,9 @@ const WebhookServer = require('./WebhookServer.js');
 const Bank = require('./Bank.js');
 const SequelizeDatabase = require('../db/SequelizeDatabase.js');
 const IntentHandler = require('./IntentHandler.js');
-const { EventEmitter } = require('events');
 
-class GarryClient extends EventEmitter {
+class GarryClient {
     constructor(config) {
-        super();
         this.config = config;
         this.db = null;
         this.bank = null;
