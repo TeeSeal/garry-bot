@@ -11,7 +11,7 @@ class Transaction {
         this.currencyCode = opts.currencyCode;
         this.description = opts.description;
         this.mode = opts.mode;
-        this.category = opts.extra ? opts.extra.originalCategory : opts.originalCategory;
+        this.category = opts.extra ? opts.extra.originalCategory : opts.category;
     }
 
     toJSON() {

@@ -12,10 +12,8 @@ class Util {
         return obj;
     }
 
-    static sleep(time) {
-        return new Promise(resolve => {
-            setTimeout(resolve, time);
-        });
+    static uniq(array) {
+        return array.filter((element, index) => array.indexOf(element) === index);
     }
 }
 
