@@ -2,7 +2,7 @@
     "data": {
         "accounts": [
             {
-                "name": "12345678",
+                "name": "account1",
                 "currency_code": "MDL",
                 "balance": -2436.16,
                 "extra": {
@@ -2824,7 +2824,7 @@
                 ]
             },
             {
-                "name": "225B123456",
+                "name": "account2",
                 "currency_code": "USD",
                 "balance": 35.61,
                 "extra": {
