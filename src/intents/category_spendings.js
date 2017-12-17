@@ -9,7 +9,7 @@ class CategorySpendingsIntent extends Intent {
         const { accountName, category, fromDate } = data.params;
 
         if (!accountName) {
-            const replies = this.client.bank.accounts.map(acc => ({ title: acc.name, payload: `category_spendings: ${category} ${acc.name} ${fromDate}` }));
+            const replies = this.client.bank.accounts.map(acc => ({ title: acc.name, payload: `category_spendings: ${category}; ${acc.name}; ${fromDate}` }));
             return res
                 .addQuickReply('For which account?', replies)
                 .send();

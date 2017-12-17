@@ -74,16 +74,15 @@ class Bank {
     }
 
     filterTransactions(opts) {
+        let transactions = this.transactions;
         if (opts.date) {
             const date = moment(date, 'DD-MM-YYYY');
-            return this.transactions.filter(t => t.madeOn === date);
+            transactions = transactions.filter(t => t.madeOn === date);
         }
-
-        let transactions = this.transactions;
 
         if (opts.fromDate) {
             const fromDate = moment(opts.fromDate, 'DD-MM-YYYY');
-            transactions.filter = transactions.filter(t => t.madeOn > fromDate);
+            transactions = transactions.filter(t => t.madeOn > fromDate);
         }
 
         if (opts.toDate) {
