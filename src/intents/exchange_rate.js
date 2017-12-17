@@ -1,5 +1,6 @@
 const axios = require('axios');
 const xml2js = require('xml2js');
+const moment = require('moment');
 
 const Intent = require('../struct/Intent.js');
 
@@ -9,9 +10,11 @@ class ExchangeRateIntent extends Intent {
     }
 
     exec(data, res) {
-        const { from, to, amount } = data.params;
+        const { from, to, amount, date } = data.params;
+        let d = moment(date);
+        if (!d.isValid()) d = moment();
 
-        axios.get('https://bnm.md/en/official_exchange_rates?date=17.12.2017').then(r => {
+        axios.get(`https://bnm.md/en/official_exchange_rates?date=${d.format('DD.MM.YYYY')}`).then(r => {
             xml2js.parseString(r.data, (err, p) => {
                 if (err) throw err;
                 const rates = p.ValCurs.Valute.map(v => [v.CharCode[0], parseFloat(v.Value[0])]);
