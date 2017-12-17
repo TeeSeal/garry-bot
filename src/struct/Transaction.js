@@ -14,11 +14,15 @@ class Transaction {
         this.category = opts.extra ? opts.extra.originalCategory : opts.category;
     }
 
+    get jsonDate() {
+        return this.madeOn.format().split('T')[0];
+    }
+
     toJSON() {
         return {
             id: this.id,
             accountID: this.accountID,
-            madeOn: this.madeOn.format().split('T')[0],
+            madeOn: this.jsonDate,
             amount: this.amount,
             currencyCode: this.currencyCode,
             description: this.description,
