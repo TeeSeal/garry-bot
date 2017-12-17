@@ -8,7 +8,6 @@ class CategorySpendingsIntent extends Intent {
     exec(data, res) {
         let { accountName, category, fromDate } = data.params;
         category = this.client.bank.findCategory(category);
-
         if (!category) return res.addMessage('There is no such category.').send();
 
         if (!accountName) {
@@ -24,7 +23,7 @@ class CategorySpendingsIntent extends Intent {
 
         const transactions = this.client.bank.filterTransactions({ fromDate, account, category });
         const amount = transactions.reduce((am, tr) => am + tr.amount, 0).toFixed(2);
-        let response = `Your spent ${amount} ${account.currencyCode} on ${category}`;
+        let response = `You spent ${amount} ${account.currencyCode} on ${category}`;
 
         if (fromDate) response += ` since ${fromDate}.`;
         else response += ' in total.';

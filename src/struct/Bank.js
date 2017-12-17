@@ -73,7 +73,7 @@ class Bank {
     }
 
     findCategory(string) {
-        this.transactionCategories.find(cat => cat.toLowerCase() === string.toLowerCast());
+        return this.transactionCategories.find(cat => cat.toLowerCase() === string.toLowerCase());
     }
 
     filterTransactions(opts) {
