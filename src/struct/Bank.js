@@ -72,6 +72,10 @@ class Bank {
         return Util.uniq(this.client.bank.transactions.map(t => t.category.replace('&', 'and')));
     }
 
+    findCategory(string) {
+        this.transactionCategories.find(cat => cat.toLowerCase() === string.toLowerCast());
+    }
+
     filterTransactions(opts) {
         let transactions = this.transactions;
         if (opts.date) {
