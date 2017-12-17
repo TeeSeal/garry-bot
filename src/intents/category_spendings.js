@@ -7,6 +7,9 @@ class CategorySpendingsIntent extends Intent {
 
     exec(data, res) {
         const { accountName, category, fromDate } = data.params;
+        if (!this.client.bank.transactionCategories.includes(category)) {
+            return res.addMessage('There is no such category.').send();
+        }
 
         if (!accountName) {
             const replies = this.client.bank.accounts.map(acc => ({ title: acc.name, payload: `category_spendings: ${category}; ${acc.name}; ${fromDate}` }));
@@ -19,7 +22,7 @@ class CategorySpendingsIntent extends Intent {
         const account = this.client.bank.accounts.find('name', accountName);
         if (!account) return res.addMessage('Sorry, couldn\'t find such an account.').send();
 
-        const transactions = this.client.bank.filterTransactions({ fromDate, account });
+        const transactions = this.client.bank.filterTransactions({ fromDate, account, category });
         const amount = transactions.reduce((am, tr) => am + tr.amount, 0).toFixed(2);
         let response = `Your spent ${amount} ${account.currencyCode} on ${category}`;
 
