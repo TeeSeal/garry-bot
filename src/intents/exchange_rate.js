@@ -21,7 +21,7 @@ class ExchangeRateIntent extends Intent {
                 const fromRate = from && from !== 'MDL' ? rates.find(rate => rate[0] === from)[1] : 1;
                 const amnt = parseInt(amount) || 1;
 
-                return res.addMessage(`${amnt} ${to} is currently ${toRate / fromRate * amnt} ${from}`).send();
+                return res.addMessage(`${amnt} ${to} is currently ${(toRate / fromRate * amnt).toFixed(4)} ${from}`).send();
             });
         });
     }
