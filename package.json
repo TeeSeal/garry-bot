@@ -28,7 +28,7 @@
     "plotly": "^1.0.6",
     "sequelize": "^4.28.5",
     "sqlite3": "^3.1.13",
-    "xml-js": "^1.5.2"
+    "xml2js": "^0.4.19"
   },
   "engines": {
     "node": "9.2.0"
