@@ -3,7 +3,6 @@ const Collection = require('./Collection.js');
 const Account = require('./Account.js');
 const Transaction = require('./Transaction.js');
 const Util = require('./Util.js');
-const moment = require('moment');
 class Bank {
     constructor(client, db) {
         this.client = client;
@@ -76,17 +75,17 @@ class Bank {
     filterTransactions(opts) {
         let transactions = this.transactions;
         if (opts.date) {
-            const date = moment(date, 'DD-MM-YYYY');
+            const date = Util.parseDate(opts.date);
             transactions = transactions.filter(t => t.madeOn === date);
         }
 
         if (opts.fromDate) {
-            const fromDate = moment(opts.fromDate, 'DD-MM-YYYY');
+            const fromDate = Util.parseDate(opts.fromDate);
             transactions = transactions.filter(t => t.madeOn > fromDate);
         }
 
         if (opts.toDate) {
-            const toDate = moment(opts.toDate, 'DD-MM-YYYY');
+            const toDate = Util.parseDate(opts.toDate);
             transactions = transactions.filter(t => t.madeOn < toDate);
         }
 

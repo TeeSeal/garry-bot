@@ -22,6 +22,24 @@ class Plot {
             });
         });
     }
+
+    static plotLine(x, y) {
+        return new Promise((resolve, reject) => {
+            const data = [{ x, y, type: 'scatter' }];
+
+            const layout = {
+                height: 1000,
+                width: 1200,
+                fileopt: 'overwrite',
+                filename: 'simple-node-example',
+            };
+
+            plotly.plot(data, layout, (err, msg) => {
+                if (err) return reject(err);
+                return resolve(`${msg.url}.png`);
+            });
+        });
+    }
 }
 
 module.exports = Plot;
