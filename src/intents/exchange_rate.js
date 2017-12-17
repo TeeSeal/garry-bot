@@ -16,12 +16,12 @@ class ExchangeRateIntent extends Intent {
                 if (err) throw err;
                 const rates = p.ValCurs.Valute.map(v => [v.CharCode[0], parseFloat(v.Value[0])]);
 
-                if (!to) return res.addMessage(rates.map(rate => rate.join(': ')).join('\n')).send();
-                const toRate = rates.find(rate => rate[0] === to)[1];
+                if (!from && !to) return res.addMessage(rates.map(rate => rate.join(': ')).join('\n')).send();
+                const toRate = to && to !== 'MDL' ? rates.find(rate => rate[0] === to)[1] : 1;
                 const fromRate = from && from !== 'MDL' ? rates.find(rate => rate[0] === from)[1] : 1;
                 const amnt = parseInt(amount) || 1;
 
-                return res.addMessage(`${amnt} ${to} is currently ${(toRate / fromRate * amnt).toFixed(4)} ${from}`).send();
+                return res.addMessage(`${amnt} ${from} = ${(fromRate / toRate * amnt).toFixed(4)} ${to || 'MDL'}`).send();
             });
         });
     }
