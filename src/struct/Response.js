@@ -2,6 +2,7 @@ class Response {
     constructor(res) {
         this.res = res;
         this.messages = [];
+        this.followupEvent = {};
     }
 
     addMessage(speech) {
@@ -20,8 +21,16 @@ class Response {
         return this;
     }
 
-    addQuickReply(replies, title) {
-        this.messages.push({ type: 2, replies, title });
+    addQuickReply(title, replies) {
+        this.messages.push({
+            type: 4,
+            payload: {
+                facebook: {
+                    text: title,
+                    quick_replies: replies.map(re => ({ content_type: 'text', title: re.title, payload: re.payload })),
+                },
+            },
+        });
         return this;
     }
 
@@ -45,8 +54,13 @@ class Response {
         return this;
     }
 
+    setFollowupEvent(opts) {
+        this.followupEvent = opts;
+        return this;
+    }
+
     send() {
-        return this.res.send({ messages: this.messages });
+        return this.res.send({ messages: this.messages, followupEvent: this.followupEvent });
     }
 }
 

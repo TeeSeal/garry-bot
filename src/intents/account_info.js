@@ -7,7 +7,13 @@ class AccountInfoIntent extends Intent {
 
     exec(data, res) {
         const accountName = data.params.account;
-        if (!accountName) return res.addMessage('What account do you want information on?').send();
+        if (!accountName) {
+            const replies = this.client.bank.accounts.map(acc => ({ title: acc.name, payload: `account: ${acc.name}` }));
+            return res
+                .addQuickReply('For which account?', replies)
+                .send();
+        }
+
         const account = this.client.bank.accounts.find('name', accountName);
         if (!account) return res.addMessage('Sorry, couldn\'t find such an account.').send();
 
