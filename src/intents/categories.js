@@ -1,5 +1,5 @@
 const Intent = require('../struct/Intent.js');
-const { uniq } = require('../struct/Util.js');
+const Plot = require('../struct/Plot.js');
 
 class CategoriesIntent extends Intent {
     constructor(handler) {
@@ -7,8 +7,12 @@ class CategoriesIntent extends Intent {
     }
 
     exec(data, res) {
-        const response = this.client.bank.transactionCategories.join(', ');
-        return res.addMessage(response).send();
+        const categories = this.client.bank.transactionCategories;
+        const values = categories.map(cat => this.client.bank.transactions.filter(t => t.category === cat).size);
+
+        Plot.plotPie(values, categories).then(url => {
+            return res.addImage(url).send();
+        });
     }
 }
 

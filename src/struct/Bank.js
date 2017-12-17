@@ -70,7 +70,7 @@ class Bank {
     }
 
     get transactionCategories() {
-        return Util.uniq(this.client.bank.transactions.map(t => t.category));
+        return Util.uniq(this.client.bank.transactions.map(t => t.category.replace('&', 'and')));
     }
 
     filterTransactions(opts) {
